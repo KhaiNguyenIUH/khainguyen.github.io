@@ -1,25 +1,20 @@
-import * as THREE from 'three';
+// Optional: Implement fade-in effect on scroll
+const features = document.querySelectorAll('.feature');
 
-// Scene setup
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-const renderer = new THREE.WebGLRenderer();
-renderer.setSize(window.innerWidth, window.innerHeight);
-document.body.appendChild(renderer.domElement);
+window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    features.forEach(feature => {
+        const offsetTop = feature.offsetTop;
+        if (scrollY > offsetTop - window.innerHeight / 1.3) {
+            feature.style.opacity = 1;
+            feature.style.transform = 'translateY(0)';
+        }
+    });
+});
 
-// Cube example
-const geometry = new THREE.BoxGeometry();
-const material = new THREE.MeshBasicMaterial({ color: 0x0077ff });
-const cube = new THREE.Mesh(geometry, material);
-scene.add(cube);
-
-camera.position.z = 5;
-
-// Animation loop
-function animate() {
-    requestAnimationFrame(animate);
-    cube.rotation.x += 0.01;
-    cube.rotation.y += 0.01;
-    renderer.render(scene, camera);
-}
-animate();
+// Initial fade-in setup
+features.forEach(feature => {
+    feature.style.opacity = 0;
+    feature.style.transform = 'translateY(50px)';
+    feature.style.transition = 'opacity 0.8s, transform 0.8s';
+});
