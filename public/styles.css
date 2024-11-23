@@ -1,0 +1,351 @@
+/* Reset some basic styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f9;
+    scroll-behavior: smooth;
+}
+
+/* Hero Section */
+.hero {
+    height: 80vh;
+    background: url('images/hero.jpg') no-repeat center center/cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+}
+
+.hero-content h1 {
+    font-size: 4rem;
+    color: #333;
+    font-weight: bold;
+}
+
+.hero-content p {
+    color: #333;
+    font-size: 1.5rem;
+    margin-top: 10px;
+}
+
+/* Feature Sections */
+.feature {
+    display: flex;
+    align-items: center;
+    padding: 80px 10%;
+}
+
+.feature-left .feature-content {
+    flex-direction: row;
+}
+
+.feature-right .feature-content {
+    flex-direction: row-reverse;
+}
+
+.feature-content {
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.feature img {
+    width: 50%;
+    height: auto;
+}
+
+.feature-text {
+    padding: 20px;
+    width: 50%;
+}
+
+.feature-text h2 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.feature-text p {
+    font-size: 1.25rem;
+    color: #666;
+}
+
+/* Call to Action Section */
+.cta {
+    background-color: #f8f8f8;
+    padding: 50px;
+    text-align: center;
+}
+
+.cta h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.cta button {
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    color: #fff;
+    background-color: #333;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.cta button:hover {
+    background-color: #555;
+}
+
+.download-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.download-buttons a img {
+    height: 50px; /* Adjust the size as needed */
+    width: auto;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+
+    .feature {
+        flex-direction: column;
+    }
+
+    .feature img {
+        width: 100%;
+    }
+}
+
+/* Smooth scrolling */
+.gallery {
+    scroll-behavior: smooth;
+}
+
+/* Optional styling for scrollbar */
+.gallery::-webkit-scrollbar {
+    height: 10px;
+}
+
+.gallery::-webkit-scrollbar-thumb {
+    background: #aaa;
+    border-radius: 5px;
+}
+
+.gallery::-webkit-scrollbar-track {
+    background: #e0e0e0;
+}
+
+/* Video Section */
+.video-section {
+    padding: 50px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f9f9f9; /* Optional background color for contrast */
+}
+
+.video-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 900px; /* Limit the maximum width of the video */
+    padding-top: 56.25%; /* Maintain a 16:9 aspect ratio */
+    overflow: hidden;
+    border-radius: 10px; /* Optional: Add rounded corners */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Optional: Add a soft shadow */
+}
+
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* Upload Section */
+.upload-section {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .upload-section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+  
+  .upload-section form {
+    display: inline-block;
+    background: white;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .upload-section input[type="file"] {
+    margin-bottom: 10px;
+    padding: 5px;
+    font-size: 1rem;
+  }
+  
+  .upload-section button {
+    padding: 10px 20px;
+    background-color: #6200ea;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+  
+  .upload-section button:hover {
+    background-color: #3700b3;
+  }
+  
+  /* Gallery Section */
+  .gallery-section {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .gallery-section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+  
+  .gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+  }
+  
+  .gallery video {
+    width: 300px;
+    height: auto;
+    border-radius: 5px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .login-container {
+    text-align: center;
+    background: white;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  input {
+    width: 80%;
+    margin: 10px 0;
+    padding: 10px;
+    font-size: 16px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    background-color: #6200ea;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #3700b3;
+  }
+
+  .channel-layout {
+    display: flex;
+    min-height: 100vh;
+    > * {
+      flex-basis: 100%;
+    }
+  }
+  .channel-list-wrapper {
+    h1 {
+      font-size: 1.75rem;
+    }
+    padding: var(--space-sm);
+  }
+  .channel {
+    display: grid;
+    grid-template-columns: 1rem 4rem 1fr;
+    gap: 1rem;
+    align-items: center;
+    background: var(--color-background-card);
+    margin: 0.5rem 0;
+    padding: 0.5rem;
+    border-radius: var(--border-radius);
+    transition: all 250ms;
+    border: var(--border-width) solid var(--color-background-card);
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+    &[data-playing="true"] {
+      border-color: var(--color-link-default);
+    }
+  }
+  .play-channel {
+    all: unset;
+    cursor: pointer;
+    height: 100%;
+    background: var(--color-background);
+  }
+  .channel-title {
+    font-weight: 800;
+  }
+  .channel-language {
+    color: var(--color-ui);
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+  .handle {
+    text-align: center;
+    opacity: 0.2;
+    cursor: ns-resize;
+  }
+  .label {
+    color: var(--color-ui);
+    margin: var(--space-sm) 0 0.25rem 0;
+  }
+  .player-wrapper {
+    background: var(--color-background-intense);
+    padding: var(--space-sm);
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+  }
+  .sticky {
+    position: sticky;
+    top: var(--space-sm);
+  }
+  .video-wrapper {
+    aspect-ratio: 16 / 9;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    video {
+      height: 100%;
+      width: 100%;
+      object-fit: contain;
+    }
+  }
+  #player {
+    width: 100%;
+    height: auto;
+    background: #000;
+    display: block;
+}

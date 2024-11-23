@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Channel Streamer</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .channel-layout {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .channel-list-wrapper {
+            flex: 1;
+            max-width: 30%;
+            padding: 20px;
+            background: #f4f4f4;
+        }
+        .channel-list {
+            list-style: none;
+            padding: 0;
+        }
+        .channel {
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+        }
+        .play-channel {
+            background: none;
+            border: none;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        .channel-poster {
+            width: 60px;
+            height: 40px;
+            object-fit: cover;
+        }
+        .channel-info {
+            flex-grow: 1;
+        }
+        .player-wrapper {
+            flex: 2;
+            padding: 20px;
+        }
+        .video-wrapper {
+            background: black;
+            padding: 10px;
+            border-radius: 8px;
+        }
+        #player {
+            width: 100%;
+            height: auto;
+        }
+        .sticky {
+            position: sticky;
+            top: 0;
+        }
+        .label {
+            font-size: 14px;
+            color: gray;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Main Layout -->
+    <main class="channel-layout">
+        <!-- Channel List Section -->
+        <div class="channel-list-wrapper">
+            <h1>Channels</h1>
+            <ul class="channel-list">
+                <!-- Channels will be dynamically populated -->
+            </ul>
+        </div>
+
+        <!-- Player Section -->
+        <div class="player-wrapper">
+            <div class="sticky">
+                <div class="video-wrapper">
+                    <video id="player" preload="none" controls autoplay crossorigin style="width: 100%; height: auto;"></video>
+                </div>
+                <div class="label">Now Playing</div>
+                <h2 id="channel-playing">Channel Name</h2>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Sample Channel Data
+        const channelData = [
+            {
+                title: "NBC News Now",
+                url: "https://cdn3.turboviplay.com/data1/6730bb3ca53cb/6730bb3ca53cb.m3u8",
+                image: "https://i.imgur.com/v48mMRT.png",
+                language: "English"
+            },
+            {
+                title: "NBC News Nows",
+                url: "uploads/output.m3u8",
+                image: "https://i.imgur.com/v48mMRT.png",
+                language: "English"
+            },
+            {
+                title: "NBC News Nows",
+                url: "https://proxy.playvideo.xyz/videos/3167065fc5fd168e83f614995772d5b2/index.m3u8",
+                image: "https://i.imgur.com/v48mMRT.png",
+                language: "English"
+            },
+            // Additional channels...
+        ];
+
+        // Populate Channel List
+        const channelList = document.querySelector(".channel-list");
+        channelData.forEach(channel => {
+            const markup = `
+                <li class="channel">
+                    <button class="play-channel" title="${channel.title}" data-m3u8="${channel.url}">
+                        <img class="channel-poster" src="${channel.image}" alt="${channel.title}">
+                    </button>
+                    <div class="channel-info">
+                        <div class="channel-title">${channel.title}</div>
+                        <div class="channel-language">${channel.language}</div>
+                    </div>
+                </li>
+            `;
+            channelList.insertAdjacentHTML("beforeend", markup);
+        });
+
+        // Setup HLS.js Player
+        const video = document.querySelector("#player");
+        const nowPlayingTitle = document.querySelector("#channel-playing");
+        let hls; // HLS instance
+
+        // Load Stream
+        function loadStream(channelPlay) {
+            const url = channelPlay.dataset.m3u8;
+            const title = channelPlay.title;
+
+            // Update "Now Playing"
+            nowPlayingTitle.textContent = title;
+
+            // Dispose previous HLS instance if exists
+            if (hls) {
+                hls.destroy();
+                hls = null;
+            }
+
+            if (Hls.isSupported()) {
+                hls = new Hls();
+                hls.loadSource(url);
+                hls.attachMedia(video);
+                hls.on(Hls.Events.MANIFEST_PARSED, () => {
+                    console.log(`Loaded: ${title}`);
+                    video.play();
+                });
+                hls.on(Hls.Events.ERROR, (event, data) => {
+                    console.error("HLS.js error:", data);
+                });
+            } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
+                console.log("Native HLS support detected");
+                video.src = url;
+                video.addEventListener("loadedmetadata", () => {
+                    video.play();
+                });
+            } else {
+                alert("HLS is not supported in your browser.");
+            }
+        }
+
+        // Attach Event Listeners to Buttons
+        const channelPlays = document.querySelectorAll(".play-channel");
+        channelPlays.forEach(channelPlay => {
+            channelPlay.addEventListener("click", () => {
+                loadStream(channelPlay);
+            });
+        });
+    </script>
+</body>
+</html>
